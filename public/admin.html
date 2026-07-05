@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>萬萬沒想到｜驚喜研究所管理中心</title>
+  <title>萬萬沒想到｜驚喜研究所後台基地</title>
   <link rel="stylesheet" href="/styles.css" />
   <style>
     :root{
@@ -140,6 +140,27 @@
     @media(max-width:1100px){.cards{grid-template-columns:repeat(2,1fr)}.upload-grid{grid-template-columns:1fr}.odds-meta{align-items:flex-start;text-align:left}.current-odds img{max-height:none}}
     @media(max-width:860px){.admin-layout{grid-template-columns:1fr}.side{height:auto;position:relative}.side nav{display:flex;overflow:auto;gap:8px;padding-bottom:4px}.side a{white-space:nowrap}.side-footer{display:none}.admin-main{padding:16px}.form-grid{grid-template-columns:1fr}.admin-topbar{align-items:flex-start;flex-direction:column}.brand-block{border-bottom:0;padding-bottom:4px}}
     @media(max-width:540px){.cards{grid-template-columns:1fr}.admin-main h2{font-size:24px}.panel{padding:14px}.stat b{font-size:25px}}
+
+    /* v8.7 lively 3D admin refresh */
+    .side,.stat,.panel,.login-card{
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.075),transparent 20%),
+        linear-gradient(180deg,rgba(29,37,52,.94),rgba(9,13,20,.96));
+      border-color:rgba(255,196,0,.18);
+      box-shadow:0 34px 90px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.10);
+    }
+    .side{box-shadow:24px 0 65px rgba(0,0,0,.38), inset -1px 0 0 rgba(255,196,0,.13)}
+    .brand-avatar,.logo-badge{
+      background:linear-gradient(145deg,#fff3a4 0%,#ffc400 40%,#ff9500 78%,#7d4300 100%);
+      box-shadow:inset 0 2px 2px rgba(255,255,255,.70),inset 0 -8px 16px rgba(88,40,0,.28),0 16px 34px rgba(255,196,0,.26),0 0 42px rgba(255,196,0,.18);
+    }
+    .admin-main h2{font-size:clamp(26px,3vw,36px);text-shadow:0 4px 0 #000,0 16px 28px rgba(0,0,0,.45)}
+    .btn{background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.04));box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 14px 26px rgba(0,0,0,.24)}
+    .btn:hover{transform:translateY(-3px) scale(1.01)}
+    .btn.primary,.btn.ok{box-shadow:inset 0 2px 0 rgba(255,255,255,.55),inset 0 -8px 16px rgba(0,0,0,.16),0 18px 38px rgba(255,196,0,.22),0 8px 18px rgba(0,0,0,.25)}
+    .stat,.panel{transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}.stat:hover,.panel:hover{transform:translateY(-4px);border-color:rgba(255,196,0,.34);box-shadow:0 42px 100px rgba(0,0,0,.62),0 0 42px rgba(255,196,0,.08)}
+    .table-wrap{box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 38px rgba(0,0,0,.28)}
+    .upload-zone,.current-odds,.odds-meta{background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(0,0,0,.16));box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 14px 30px rgba(0,0,0,.24)}
   </style>
 </head>
 <body>
@@ -165,7 +186,7 @@
         <a class="active" href="#dashboard"><span class="ico">⌂</span>首頁總覽</a>
         <a href="#products"><span class="ico">▣</span>商品管理</a>
         <a href="#products"><span class="ico">◎</span>刮刮樂管理</a>
-        <a href="#odds"><span class="ico">⚠</span>最新賠率上傳</a>
+        <a href="#odds"><span class="ico">⚠</span>最新賠率看板上傳</a>
         <a href="#richmenu"><span class="ico">▤</span>Rich Menu</a>
         <a href="#orders"><span class="ico">▱</span>訂單管理</a>
         <a href="#dashboard"><span class="ico">♙</span>會員管理</a>
@@ -192,7 +213,7 @@
 
       <section id="odds" class="panel feature">
         <div class="section-head">
-          <div><h2>最新賠率上傳</h2><p>上傳最新賠率圖片，將顯示於前台與 LINE Rich Menu 入口，供會員查看。</p></div>
+          <div><h2>最新賠率看板上傳</h2><p>上傳最新賠率圖片，將顯示於前台與 LINE Rich Menu 入口，供會員查看。</p></div>
         </div>
         <form id="oddsForm">
           <div class="upload-grid">
@@ -217,7 +238,7 @@
       </section>
 
       <section id="products" class="panel">
-        <div class="section-head"><div><h2>商品上下架</h2><p>內部人員可新增商品、補庫存、上架與下架。上架商品會顯示在客人前台。</p></div></div>
+        <div class="section-head"><div><h2>商品上架控制台</h2><p>在這裡新增商品、補庫存、調整上下架；上架後會立即出現在前台商品櫃。</p></div></div>
         <form id="productForm">
           <input type="hidden" name="id" />
           <div class="form-grid">
