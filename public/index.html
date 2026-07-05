@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>萬萬沒想到｜驚喜研究所</title>
+  <meta name="theme-color" content="#070707" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body class="consumer">
+  <header class="topbar lab-topbar">
+    <div class="wrap">
+      <button id="brandGate" class="brand-gate" aria-label="萬萬沒想到驚喜研究所">
+        <span class="logo-badge">萬</span>
+        <span class="brand-copy"><strong>萬萬沒想到</strong><small>驚喜研究所</small></span>
+      </button>
+      <nav class="nav">
+        <a class="btn ghost" href="#scratch">立即刮刮樂</a>
+        <a class="btn ghost" href="#odds">最新賠率</a>
+        <a class="btn ghost" href="#events">最新活動</a>
+        <button id="loginBtn" class="btn primary">登入會員</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero lab-hero">
+      <div class="wrap">
+        <div class="hero-card lab-hero-card">
+          <span class="tag gold-tag">ONLINE SCRATCH｜公平公開紀錄</span>
+          <h1>萬萬沒想到<br/>驚喜研究所</h1>
+          <p>黑金風格線上刮刮樂平台。登入會員後可直接開刮，獎項、剩餘數、預估機率與開刮紀錄公開顯示，並以伺服器端加密亂數產生結果。</p>
+          <div class="hero-actions">
+            <a href="#scratch" class="btn primary">立即刮刮樂</a>
+            <a href="#odds" class="btn">查看最新賠率</a>
+            <button id="heroLogin" class="btn ghost">登入 / 建立會員</button>
+          </div>
+          <div id="memberBox" class="notice member-box" style="margin-top:16px;display:none"></div>
+        </div>
+        <div class="lab-visual" aria-hidden="true">
+          <div class="lab-orb">?</div>
+          <div class="lab-caption">每一次開刮<br/><b>都有萬萬沒想到的驚喜</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scratch" class="section scratch-section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>立即刮刮樂</h2>
+            <p>登入會員後開始線上刮卡。刮開前結果已由後端產生並寫入紀錄，避免前端自行決定獎項。</p>
+          </div>
+          <button class="btn ghost" onclick="app.loadScratchInfo()">更新獎池</button>
+        </div>
+        <div class="scratch-layout">
+          <div class="scratch-card-panel">
+            <div id="scratchStage" class="scratch-stage idle">
+              <div class="scratch-result">
+                <span id="scratchTier">READY</span>
+                <strong id="scratchPrize">登入後開始刮刮樂</strong>
+                <small id="scratchHash">伺服器端公平抽取，紀錄公開。</small>
+              </div>
+              <canvas id="scratchCanvas" width="680" height="390" aria-label="刮刮樂覆蓋層"></canvas>
+            </div>
+            <div class="scratch-actions">
+              <button id="drawScratchBtn" class="btn primary">領取線上刮刮樂</button>
+              <button id="resetScratchBtn" class="btn ghost">重置畫面</button>
+            </div>
+          </div>
+          <div class="fairness-card">
+            <span class="tag gold-tag">公開透明</span>
+            <h3>公平性機制</h3>
+            <ul>
+              <li>結果由後端 `crypto.randomInt` 產生，前端不能自行指定。</li>
+              <li>每個獎項公開顯示權重、預估機率與剩餘數。</li>
+              <li>每次開刮保存 SHA-256 驗證雜湊與公開紀錄。</li>
+              <li>實體獎項剩餘數為 0 後自動停止抽出，避免抽中無庫存。</li>
+            </ul>
+            <div id="scratchOdds" class="odds-list">獎池載入中...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="odds" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>最新賠率</h2>
+            <p>最新賠率圖片會顯示在這裡，並標示最後更新時間。</p>
+          </div>
+          <button class="btn ghost" onclick="app.loadOdds()">重新整理</button>
+        </div>
+        <div id="oddsBox" class="notice">最新賠率載入中...</div>
+      </div>
+    </section>
+
+    <section id="shop" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>商品專區</h2>
+            <p>商品圖片、價格與庫存直接呈現，售完會自動停止購買。</p>
+          </div>
+          <button class="btn ghost" onclick="app.loadProducts()">重新整理</button>
+        </div>
+        <div id="products" class="grid"></div>
+      </div>
+    </section>
+
+    <section id="events" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>最新活動</h2>
+            <p>活動公告、限時優惠與刮刮樂檔期會集中顯示在這裡。</p>
+          </div>
+        </div>
+        <div class="grid event-grid">
+          <article class="product product-card">
+            <div class="product-body">
+              <span class="tag gold-tag">本期活動</span>
+              <h3>戰鬥陀螺驚喜研究所</h3>
+              <p>每一次開刮都有驚喜。獎項、剩餘數與賠率以平台公告為準。</p>
+              <a class="btn primary" href="#scratch">立即參加</a>
+            </div>
+          </article>
+          <article class="product product-card">
+            <div class="product-body">
+              <span class="tag gold-tag">付款方式</span>
+              <h3>銀行匯款人工確認</h3>
+              <p>目前付款方式先採銀行匯款。送出匯款資料後，內部人員確認入帳才會完成訂單。</p>
+              <a class="btn ghost" href="#orders">查看紀錄</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="orders" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>我的消費紀錄</h2>
+            <p>登入後可查詢今日消費品項、金額與付款狀態。</p>
+          </div>
+          <button class="btn ghost" onclick="app.loadOrders()">查詢紀錄</button>
+        </div>
+        <div id="ordersList" class="notice">請先登入會員後查詢。</div>
+      </div>
+    </section>
+
+    <section id="ledger" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h2>公開開刮紀錄</h2>
+            <p>不顯示個資，只顯示開刮時間、獎項與驗證雜湊。</p>
+          </div>
+          <button class="btn ghost" onclick="app.loadLedger()">更新紀錄</button>
+        </div>
+        <div id="ledgerList" class="ledger-list notice">尚無紀錄。</div>
+      </div>
+    </section>
+  </main>
+
+  <div id="cartFloat" class="cart-float">
+    <div><strong id="cartSummary">0 件｜$0</strong><br/><small>銀行匯款付款，送出後保留庫存</small></div>
+    <button id="checkoutBtn" class="btn primary">去結帳</button>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="#scratch"><b>🎫</b>刮刮樂</a>
+    <a href="#odds"><b>📈</b>賠率</a>
+    <a href="#events"><b>📣</b>活動</a>
+    <a href="#orders"><b>🧾</b>紀錄</a>
+    <a href="#" id="bottomLogin"><b>👤</b>會員</a>
+  </nav>
+
+  <div id="authModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2>會員登入</h2>
+        <button class="btn ghost small" data-close="authModal">關閉</button>
+      </div>
+      <div class="notice">可使用 LINE、Google 或自主帳號登入。</div>
+      <div class="split" style="margin-top:12px">
+        <a id="lineLoginLink" class="btn ok" href="/auth/line">LINE 登入</a>
+        <a id="googleLoginLink" class="btn" href="/auth/google">Google 登入</a>
+      </div>
+      <div class="tabs">
+        <button id="tabLogin" class="active">自主帳號登入</button>
+        <button id="tabRegister">建立新會員</button>
+      </div>
+      <form id="loginForm">
+        <div class="field"><label>Email</label><input class="input" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label>密碼</label><input class="input" name="password" type="password" autocomplete="current-password" required /></div>
+        <button class="btn primary" type="submit" style="width:100%">登入</button>
+      </form>
+      <form id="registerForm" style="display:none">
+        <div class="field"><label>姓名</label><input class="input" name="name" required /></div>
+        <div class="field"><label>手機</label><input class="input" name="phone" inputmode="tel" /></div>
+        <div class="field"><label>Email</label><input class="input" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label>密碼</label><input class="input" name="password" type="password" minlength="6" autocomplete="new-password" required /></div>
+        <button class="btn primary" type="submit" style="width:100%">建立會員</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="checkoutModal" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2>銀行匯款結帳</h2>
+        <button class="btn ghost small" data-close="checkoutModal">關閉</button>
+      </div>
+      <div id="checkoutItems"></div>
+      <div class="bank-box">
+        <strong>匯款帳戶</strong><br/>
+        <span id="bankAccount">載入中...</span><br/>
+        <small>匯款後填寫末五碼與匯款日期，工作人員確認後訂單才會轉為已付款。</small>
+      </div>
+      <form id="checkoutForm">
+        <div class="split">
+          <div class="field"><label>匯款帳號末五碼</label><input class="input" name="bankLast5" maxlength="5" inputmode="numeric" required /></div>
+          <div class="field"><label>匯款日期</label><input class="input" name="transferDate" type="date" required /></div>
+        </div>
+        <div class="field"><label>匯款金額</label><input class="input" name="transferAmount" inputmode="numeric" required /></div>
+        <div class="field"><label>備註</label><textarea name="note" placeholder="例如：已匯款，戶名王○○"></textarea></div>
+        <button class="btn primary" type="submit" style="width:100%">送出匯款訂單</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="/vendor/scratchcard.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>
