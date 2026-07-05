@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" role="img" aria-label="萬萬沒想到商品圖">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b0b0f"/>
+      <stop offset="0.55" stop-color="#1b1510"/>
+      <stop offset="1" stop-color="#d6a72c"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" rx="36" fill="url(#g)"/>
+  <circle cx="510" cy="82" r="88" fill="#ffd76a" opacity="0.18"/>
+  <circle cx="128" cy="314" r="120" fill="#ffffff" opacity="0.06"/>
+  <text x="50%" y="46%" text-anchor="middle" font-family="Arial, 'Microsoft JhengHei', sans-serif" font-size="38" font-weight="800" fill="#ffe6a3">萬萬沒想到</text>
+  <text x="50%" y="59%" text-anchor="middle" font-family="Arial, 'Microsoft JhengHei', sans-serif" font-size="24" font-weight="700" fill="#fff7d6">驚喜研究所</text>
+</svg>

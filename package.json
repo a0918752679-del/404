@@ -1,0 +1,26 @@
+{
+  "name": "ww-kuji-v87",
+  "version": "8.7.0",
+  "description": "萬萬沒想到驚喜研究所｜Zeabur Docker-ready black-gold online scratch platform",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "node --watch server.js",
+    "sync-richmenu": "node scripts/sync-richmenu.js",
+    "delete-richmenu": "node scripts/delete-richmenu.js",
+    "healthcheck": "node -e \"fetch('http://127.0.0.1:'+(process.env.PORT||8080)+'/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\"",
+    "smoke": "node scripts/smoke-test.mjs"
+  },
+  "engines": {
+    "node": ">=18.18.0"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  },
+  "packageManager": "npm@10.8.2"
+}
